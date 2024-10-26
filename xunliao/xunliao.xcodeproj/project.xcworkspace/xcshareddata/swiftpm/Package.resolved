@@ -1,0 +1,33 @@
+{
+  "originHash" : "c6ae23d11df1cc601b21eab3b07654e01fd8a8ae49655dc8e4e8b38f16049ea0",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "e16d3481f5ed35f0472cb93350085853d754913f",
+        "version" : "5.10.1"
+      }
+    },
+    {
+      "identity" : "url-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dmytro-anokhin/url-image",
+      "state" : {
+        "revision" : "4042f955f1fdff00ced85545e1eecdbf969b5cd0",
+        "version" : "3.1.1"
+      }
+    },
+    {
+      "identity" : "valet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/square/Valet.git",
+      "state" : {
+        "revision" : "3df8eaa90e1fa0d80830733cdc3c9e098146af3d",
+        "version" : "4.3.0"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -15,11 +15,10 @@ class AFRequest{
     
     private var requestType: HTTPMethod = .post //请求类型
     private var url: String? //请求地址
-    private var params: [String: Any]? //请求参数
+    private var params: [String: Any] = [:] //请求参数
     private var headers: HTTPHeaders? //请求头
     private var success: SuccessHandlerType? //请求成功回调
     private var failure: FailureHandlerType? //请求失败回调
-
 }
 
 //扩展AFRequest
@@ -34,7 +33,7 @@ extension AFRequest {
         return self
     }
     
-    func params(_ params:[String: Any]?) -> Self {
+    func params(_ params:[String: Any]) -> Self {
         self.params = params
         return self
     }
@@ -53,11 +52,12 @@ extension AFRequest {
         self.failure = handler
         return self
     }
+    
 }
 
 //扩展请求方法
 extension AFRequest{
-    func request(completion: @escaping(Result<BaseModel,Error>)->Void) {
+    func request<T: Decodable>(_ of: T.Type,completion: @escaping(Result<T,Error>)->Void) {
         guard let URLString  = url else {
             //请求地址不为空
             print("请求地址不能为空")
@@ -67,24 +67,27 @@ extension AFRequest{
         
         var requestHasders = headers ?? HTTPHeaders()
         if requestHasders.count == 0 {
+            let languageCode = UserDefaults.standard.string(forKey: "AppLanguageCode") == "en" ? "1":"0"
             //请求头为空则重新设置
             requestHasders.add(name: "Content-Type", value: "application/json;charset=utf-8")
-            requestHasders.add(name: "languageIndex", value: "0")
+            requestHasders.add(name: "language", value: languageCode)
             requestHasders.add(name: "token", value: "")
         }
+        //固定参数
+        params["store_id"] = Config.storeId
         //发起网络请求
         AF.sessionConfiguration.timeoutIntervalForRequest = 60
         AF.request(
              URLString,
              method: requestType,
              parameters: params,
-             encoding: URLEncoding.default,
+             encoding: JSONEncoding.default,
              headers: requestHasders,
              interceptor: nil,
              requestModifier: nil
         )
         .validate()
-        .responseDecodable(of:BaseModel.self) { response in
+        .responseDecodable(of: T.self){ response in
             //处理返回数据
             switch response.result {
                 case .success(let res):

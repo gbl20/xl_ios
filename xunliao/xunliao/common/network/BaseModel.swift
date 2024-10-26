@@ -5,9 +5,8 @@
 //  Created by  mac on 2024/10/22.
 //
 
-class BaseModel: Decodable {
-    var status:String
+struct BaseModel<T:Decodable>:Decodable {
+    var status:Int
     var msg:String
-    var data: [String]?
-    
+    var data: T
 }

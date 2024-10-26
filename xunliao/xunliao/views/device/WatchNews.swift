@@ -45,19 +45,19 @@ struct WatchNews: View {
         .onAppear{
             //页面显示的时候触发
             //测试发送网络请求
-            AFRequest()
-                .url("https://adm.api.sz90.cn/index.php/android/getCurrentDeviceUserinfo")
-                .requestType(.post)
-                .headers(nil)
-                .request{result in
-                    switch result{
-                        case .success(let res):
-                            print("status:\(res.status)")
-                        case .failure(let err):
-                            print("请求失败：\(err.localizedDescription)")
-                        
-                    }
-                }
+//            AFRequest()
+//                .url("https://adm.api.sz90.cn/index.php/android/getCurrentDeviceUserinfo")
+//                .requestType(.post)
+//                .headers(nil)
+//                .request{result in
+//                    switch result{
+//                        case .success(let data):
+//                            print("status:\(res.status)")
+//                        case .failure(let err):
+//                            print("请求失败：\(err.localizedDescription)")
+//                        
+//                    }
+//                }
         }
     }
 }
